@@ -1,4 +1,3 @@
-import sys
 import re
 import numpy as np
 import pandas as pd
@@ -28,8 +27,8 @@ def calculate_price(row):
     if value == 0.0:
         return np.nan
     else:
-        return value / row['Gross amount']
-
+        return value / row['Net amount']
+    
 def calculate_fee(row):
     if row['Fee'] != 0.0:
         return 100 * row['Fee'] / row['Gross amount']
@@ -37,8 +36,8 @@ def calculate_fee(row):
         return 100 * row['Fee (USD)'] / row['Gross amount (USD)']
     return 0.0
 
-if __name__ == "__main__":
-    sb = pd.read_csv(sys.argv[1], skiprows=8)
+def convert(source, destination):
+    sb = pd.read_csv(source, skiprows=8)
     sb['Price'] = sb.apply(calculate_price, axis=1)
     sb['Exchange'] = 'SwissBorg'
     sb['Pair'] = sb['Note'].apply(lambda _: find_exchange_pair(_)[1])
@@ -53,4 +52,8 @@ if __name__ == "__main__":
     sb.rename(columns={'Currency': 'Coin Symbol', 'Time in UTC': 'Date', 'Note': 'Notes', 'Fee (percent)': 'Fee', 'Net amount': 'Amount'}, inplace=True)
     sb = sb[['Coin Symbol', 'Exchange', 'Pair', 'Type', 'Amount', 'Price', 'Fee', 'Date', 'Notes']]
     sb = sb[sb['Type'] != 'sell']
-    sb.to_csv(sys.argv[2])
+    sb.to_csv(destination)
+    return sb
+    
+if __name__ == '__main__':
+    convert(sys.argv[1], sys.argv[2])
