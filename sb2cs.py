@@ -1,6 +1,11 @@
+import sys
 import re
 import numpy as np
 import pandas as pd
+try:
+    import openpyxl
+except ModuleNotFoundError:
+    pass
 
 SB2CS_TYPES = {
     'Deposit': 'deposit',
@@ -37,7 +42,15 @@ def calculate_fee(row):
     return 0.0
 
 def convert(source, destination):
-    sb = pd.read_csv(source, skiprows=8)
+    try:
+        sb = pd.read_excel(source, skiprows=8, engine='openpyxl')
+    except Exception:
+        try:
+            sb = pd.read_csv(source, skiprows=8, sep=',')
+        except (KeyError, Exception):
+            sb = pd.read_csv(source, skiprows=8, sep=';')
+        except Exception:
+            print("Cannot read input file.")
     sb['Price'] = sb.apply(calculate_price, axis=1)
     sb['Exchange'] = 'SwissBorg'
     sb['Pair'] = sb['Note'].apply(lambda _: find_exchange_pair(_)[1])
