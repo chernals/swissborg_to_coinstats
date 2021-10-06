@@ -9,6 +9,7 @@ except ModuleNotFoundError:
 
 SB2CS_TYPES = {
     'Deposit': 'deposit',
+    'Withdrawal': 'withdrawal',
     'Earnings': 'interest_earn',
     'Sell': 'sell',
     'Buy': 'buy',
