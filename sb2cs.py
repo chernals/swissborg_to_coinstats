@@ -9,7 +9,6 @@ except ModuleNotFoundError:
 
 SB2CS_TYPES = {
     'Deposit': 'deposit',
-    'Withdrawal': 'withdrawal',
     'Earnings': 'interest_earn',
     'Sell': 'sell',
     'Buy': 'buy',
@@ -42,7 +41,16 @@ def calculate_fee(row):
         return 100 * row['Fee (USD)'] / row['Gross amount (USD)']
     return 0.0
 
+def get_base_currency(source):
+    try:
+        from openpyxl import load_workbook
+        wb = load_workbook(filename = '/Users/chernals/Downloads/account_statement.xlsx')
+        return wb.active['B4'].value
+    except ModuleNotFoundError:
+        return 'USD'
+
 def convert(source, destination):
+    base_currency = get_base_currency(source)
     try:
         sb = pd.read_excel(source, skiprows=8, engine='openpyxl')
     except Exception:
@@ -58,11 +66,11 @@ def convert(source, destination):
     sb['Type'] = sb['Type'].apply(lambda _: SB2CS_TYPES[_])
     sb['Fee (percent)'] = sb.apply(calculate_fee, axis=1)
     sb.drop('Fee', axis=1, inplace=True)
-    sb.drop('Fee (USD)', axis=1, inplace=True)
+    sb.drop(f'Fee ({base_currency})', axis=1, inplace=True)
     sb.drop('Local time', axis=1, inplace=True)
-    sb.drop('Net amount (USD)', axis=1, inplace=True)
+    sb.drop(f'Net amount ({base_currency})', axis=1, inplace=True)
     sb.drop('Gross amount', axis=1, inplace=True)
-    sb.drop('Gross amount (USD)', axis=1, inplace=True)
+    sb.drop(f'Gross amount ({base_currency})', axis=1, inplace=True)
     sb.rename(columns={'Currency': 'Coin Symbol', 'Time in UTC': 'Date', 'Note': 'Notes', 'Fee (percent)': 'Fee', 'Net amount': 'Amount'}, inplace=True)
     sb = sb[['Coin Symbol', 'Exchange', 'Pair', 'Type', 'Amount', 'Price', 'Fee', 'Date', 'Notes']]
     sb = sb[sb['Type'] != 'sell']
