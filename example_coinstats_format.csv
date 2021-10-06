@@ -1,0 +1,5 @@
+,Coin Symbol,Exchange,Pair,Type,Amount,Price,Fee,Date,Notes
+0,CHF,SwissBorg,,deposit,100000.0,,0.0,01/01/2021 00:00,
+1,CHSB,SwissBorg,,interest_earn,300.0,,0.0,01/01/2021 00:00,
+3,GRT,SwissBorg,CHF,buy,99.0,1.0101010101010102,1.0,01/01/2021 00:00,Exchanged from 100 CHF
+4,BTC,SwissBorg,,interest_earn,0.5,,50.0,01/01/2021 08:00,Yield earnings

@@ -1,0 +1,14 @@
+﻿User ID,0,,,,,,,,,
+Start Date,01/01/2021,,,,,,,,,
+End Date,31/12/2021,,,,,,,,,
+Local Currency,USD,,,,,,,,,
+Time zone,Europe/Paris,,,,,,,,,
+,,,,,,,,,,
+"Disclaimer: All data, including personal data, are used according to the SwissBorg Wealth App Privacy Policy available at: https://swissborg.com/legal/wealth-app-privacy-policy. This report (the “Report”) and any files transmitted with it are confidential, for the exclusive use of the intended individual or entity to whom they are addressed and may contain privileged information. Any use of such information, such as but not limited to retention, dissemination, distribution or copying, is strictly prohibited. Neither SwissBorg Solutions OÜ nor its representative entity for Swiss Users, SwissBorg Invest SA (“Entities”), make any representation or warranty or guarantee as to the completeness, accuracy, timeliness or suitability of any information contained within any part of the Report, nor to it being free from error. The Entities reserve the right to change any information contained in this Report without restriction or notice. The Entities do not accept any liability (whether in contract, tort or otherwise howsoever and whether or not they have been negligent) for any loss or damage (including, without limitation, loss of profit), which may arise directly or indirectly from use of or reliance on such information and/or from the Report.",,,,,,,,,,
+,,,,,,,,,,
+Local time,Time in UTC,Type,Currency,Gross amount,Gross amount (USD),Fee,Fee (USD),Net amount,Net amount (USD),Note
+01/01/2021 00:00,01/01/2021 00:00,Deposit,CHF,100000,200000,0,0,100000,200000,
+01/01/2021 00:00,01/01/2021 00:00,Earnings,CHSB,300,100,0,0,300,100,
+01/01/2021 00:00,01/01/2021 00:00,Sell,CHF,100,100,0,0,100,100,Exchanged to 100.0 GRT. The fees for the exchange was taken in the bought currency
+01/01/2021 00:00,01/01/2021 00:00,Buy,GRT,100,100,1,1,99,99,Exchanged from 100 CHF
+01/01/2021 00:00,01/01/2021 08:00,Earnings,BTC,1,50000,0.5,25000,0.5,25000,Yield earnings
